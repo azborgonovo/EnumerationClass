@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/h7bt0gkq33oidhto?svg=true)](https://ci.appveyor.com/project/AndreBorgonovo/enumerationclass)
+
 # EnumerationClass
 
 A simple, stable and reusable Enumeration base class.
