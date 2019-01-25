@@ -2,7 +2,7 @@ using Xunit;
 
 namespace EnumerationClass.Tests
 {
-    public class UnitTest1
+    public class Enumeration_GetAllShould
     {
         [Fact]
         public void Test1()

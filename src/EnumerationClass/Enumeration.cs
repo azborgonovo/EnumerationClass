@@ -10,9 +10,15 @@ namespace EnumerationClass
     /// </summary>
     public abstract class Enumeration : IComparable
     {
-        public int Value { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Value { get; }
 
-        public string DisplayName { get; private set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string DisplayName { get; }
 
         protected Enumeration(int value, string displayName)
         {
@@ -22,6 +28,11 @@ namespace EnumerationClass
 
         public override string ToString() => DisplayName;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public static IEnumerable<T> GetAll<T>() where T : Enumeration
         {
             var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
@@ -36,7 +47,7 @@ namespace EnumerationClass
             if (otherValue == null)
                 return false;
 
-            var typeMatches = GetType().Equals(obj.GetType());
+            var typeMatches = GetType() == obj.GetType();
             var valueMatches = Value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
@@ -44,12 +55,24 @@ namespace EnumerationClass
 
         public override int GetHashCode() => Value.GetHashCode();
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static T FromValue<T>(int value) where T : Enumeration
         {
             var matchingItem = Parse<T, int>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="displayName"></param>
+        /// <returns></returns>
         public static T FromDisplayName<T>(string displayName) where T : Enumeration
         {
             var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
